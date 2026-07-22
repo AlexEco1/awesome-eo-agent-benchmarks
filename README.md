@@ -14,7 +14,7 @@ result of the previous one, against executable tools or an environment.
 
 - **Passes** — take task 0 from *OpenEarthAgent* ([arXiv:2602.17665](https://arxiv.org/abs/2602.17665)): *"Which fire station and police station are closest to each other in Banff National Park within 3 km?"* To answer it, the agent first fetches the park boundary, sees it saved, then adds a fire-station layer, checks how many it found, adds a police-station layer, and only then computes the pairwise distances. Each call depends on what the previous one returned — that back-and-forth is what makes it agentic.
 - **Fails — single-turn VQA.** *VRSBench* ([arXiv:2406.12384](https://arxiv.org/abs/2406.12384), NeurIPS 2024) hands a model a remote-sensing image, asks a question about it, and grades the one-shot answer. The model looks once and replies; there's no result to observe and no next move to pick, so there's no loop.
-- **Fails — one-shot code generation.** In *AutoGEEval* ([arXiv:2505.12900](https://arxiv.org/abs/2505.12900), ISPRS Int. J. Geo-Inf.) the model writes a piece of Google Earth Engine code that gets run once and scored. Generate, execute, score is a straight line — the model never sees how it went and adjusts.
+- **Fails — one-shot code generation.** In *AutoGEEval* ([arXiv:2505.12900](https://arxiv.org/abs/2505.12900)) the model writes a piece of Google Earth Engine code that gets run once and scored. Generate, execute, score is a straight line — the model never sees how it went and adjusts.
 
 ### Gate 2 — EO / geospatial workflow
 
