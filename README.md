@@ -4,10 +4,33 @@
 
 ## Scope — what counts
 
-A benchmark is listed here if it passes two gates:
+A benchmark is listed here if it passes two gates. The examples below are real
+benchmarks; the ones that *fail* a gate are named, so the boundary is checkable.
 
-1. **Agentic** — the system takes multiple steps, choosing each action after observing the result of the previous one, against executable tools or an environment. One-shot code generation (generate → execute → score) and single-turn VQA do **not** count.
-2. **EO / geospatial workflow** — the task derives information about the physical Earth from observation data (satellite, airborne, radar, in-situ, or products derived from them — reanalysis, land cover, NDVI, SST), or uses those outputs together with other geospatial data. Purely record-based tasks (POI search, routing, generic vector operations) do not count.
+### Gate 1 — Agentic
+
+The system takes multiple steps, choosing each action after observing the
+result of the previous one, against executable tools or an environment.
+
+- **Passes** — take task 0 from *OpenEarthAgent* ([arXiv:2602.17665](https://arxiv.org/abs/2602.17665)): *"Which fire station and police station are closest to each other in Banff National Park within 3 km?"* To answer it, the agent first fetches the park boundary, sees it saved, then adds a fire-station layer, checks how many it found, adds a police-station layer, and only then computes the pairwise distances. Each call depends on what the previous one returned — that back-and-forth is what makes it agentic.
+- **Fails — single-turn VQA.** *VRSBench* ([arXiv:2406.12384](https://arxiv.org/abs/2406.12384), NeurIPS 2024) hands a model a remote-sensing image, asks a question about it, and grades the one-shot answer. The model looks once and replies; there's no result to observe and no next move to pick, so there's no loop.
+- **Fails — one-shot code generation.** In *AutoGEEval* ([arXiv:2505.12900](https://arxiv.org/abs/2505.12900), ISPRS Int. J. Geo-Inf.) the model writes a piece of Google Earth Engine code that gets run once and scored. Generate, execute, score is a straight line — the model never sees how it went and adjusts.
+
+### Gate 2 — EO / geospatial workflow
+
+A benchmark passes this gate when most of its tasks — or a good share of them —
+require the agent to work with information about the physical Earth derived from
+observation data: satellite, airborne, radar, in-situ, or products derived from
+them (reanalysis, land cover, NDVI, SST), possibly alongside other geospatial data.
+
+Some tasks can be answered just by looking things up in a map database — where
+places are, how far apart they sit, how to get between them (OpenStreetMap,
+Google Maps). Nothing there is measured about the Earth. A benchmark made up
+mostly of such tasks does not pass; a handful of them inside an otherwise-EO
+benchmark is fine.
+
+- **Passes** — for example, task 3 from *OpenEarthAgent* ([arXiv:2602.17665](https://arxiv.org/abs/2602.17665)) asks the agent to *"assess urban growth in Nizwa Province, Oman between 2019 and 2024 using the NDBI change layer."* Here the agent has to call a tool to compute the NDBI — a built-up index — from satellite imagery for each year and then take the difference, so the answer comes straight out of the observation data.
+- **Fails** — *MapEval-API*, the tool-using half of MapEval ([arXiv:2501.00316](https://arxiv.org/abs/2501.00316), ICML 2025 Spotlight), is a real multi-step agent, so it clears Gate 1. A typical task reads: *"I am driving to Brassica in Bexley via E Whittier St. After reaching Lockbourne Rd, where should I go next?"* But to solve it the agent only ever looks things up in a map — place search, place details, travel time, directions, nearby search — and nothing about the Earth is ever measured. A benchmark built mostly of tasks like this doesn't pass.
 
 **Availability legend:** ✅ code + data released · 🟡 partial release · 📄 paper only (no artifacts located).
 All links and availability statuses were verified by actually fetching them on **2026-07-17/18**. As of that date: **9 ✅ · 4 🟡 · 10 📄.**
@@ -41,3 +64,7 @@ Ordered by peer-review tier: journal → conference → workshop → preprint.
 | 21 | **GeoNatureAgent** | [arXiv:2606.12821](https://arxiv.org/abs/2606.12821) | preprint | ecology (BigEarthNet Sentinel-2 + LUCAS in-situ) | 93 | [GitHub](https://github.com/gabrielireland/GeoNatureAgent_Benchmark) | [Zenodo](https://doi.org/10.5281/zenodo.20450995) | ✅ Apache; tasks + grader + self-hostable API; 33/93 tasks numerically keyed, 60 rubric-graded |
 | 22 | **GeoAgent / GeoCode** | [arXiv:2410.18792](https://arxiv.org/abs/2410.18792) | preprint | GEE / Sentinel-2 code agents | 1,356 multi-turn (of 19,504) | [GitHub](https://github.com/Yusin2Chen/GeoAgent) | — | 📄 agent code public; the task set is not released (repo contains 1 example task) |
 | 23 | **TerraLogic** | [arXiv:2607.12497](https://arxiv.org/abs/2607.12497) | preprint | hierarchical geospatial reasoning, optical + SAR + IR | 545 | [GitHub](https://github.com/Ireliya/TerraLogic) | [HF](https://huggingface.co/datasets/Ireliya/hierarchical-geospatial-reasoning) | ✅ Apache / CC-BY; questions + gold answers + tool stack (no step-by-step traces) |
+
+## Maintainer
+
+Curated by [Alexandros Oikonomidis](https://www.linkedin.com/in/aleoikon). Suggestions and corrections are welcome — get in touch or contribute on GitHub.
