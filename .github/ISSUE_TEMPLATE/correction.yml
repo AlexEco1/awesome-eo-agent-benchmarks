@@ -1,0 +1,40 @@
+name: Correction
+description: Something in the list is wrong or out of date.
+title: "Fix: <benchmark name>, <cell>"
+labels: ["correction"]
+body:
+  - type: input
+    id: benchmark
+    attributes:
+      label: Benchmark
+    validations:
+      required: true
+  - type: dropdown
+    id: cell
+    attributes:
+      label: Which part
+      options:
+        - Paper
+        - Venue
+        - Focus
+        - Tasks
+        - Code
+        - Data
+        - Availability or licence
+        - It should be removed, moved to Near misses, or marked †
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: What it should say
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: A link that shows the correct fact (paper, venue page, repository, dataset).
+    validations:
+      required: true

@@ -1,0 +1,26 @@
+name: Check links
+
+# Opens every link in the top-level Markdown files (README.md, contributing.md).
+# Sites that block scripts (IEEE, Taylor & Francis, LinkedIn) answer 202/403/999;
+# .mlc_config.json counts those as alive so they do not raise false alarms.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"   # every Monday, 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  markdown-link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: tcort/github-action-markdown-link-check@v1.1.2
+        with:
+          use-quiet-mode: "yes"
+          use-verbose-mode: "yes"
+          config-file: ".mlc_config.json"
+          folder-path: "."
+          max-depth: "1"   # top-level .md files only: README.md, contributing.md

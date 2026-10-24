@@ -1,0 +1,69 @@
+name: New benchmark
+description: Propose a benchmark for the list. Please read contributing.md first.
+title: "Add: <benchmark name>"
+labels: ["new benchmark"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every claim in the list is checked against a primary source, so please link the evidence for each field.
+  - type: input
+    id: name
+    attributes:
+      label: Benchmark name
+    validations:
+      required: true
+  - type: input
+    id: paper
+    attributes:
+      label: Paper
+      description: arXiv or DOI link.
+    validations:
+      required: true
+  - type: input
+    id: venue
+    attributes:
+      label: Venue
+      description: Link to the venue's own page (accepted-papers list, proceedings, journal page), or "preprint".
+    validations:
+      required: true
+  - type: textarea
+    id: gate1
+    attributes:
+      label: Gate 1 evidence (agentic)
+      description: A quote from the paper or code showing that the agent sees tool results and chooses its next step, against executable tools.
+    validations:
+      required: true
+  - type: textarea
+    id: gate2
+    attributes:
+      label: Gate 2 evidence (EO or geospatial workflow)
+      description: Which observation data the tasks use, and roughly what share of the tasks use it.
+    validations:
+      required: true
+  - type: input
+    id: tasks
+    attributes:
+      label: Number of tasks
+      description: And where it is stated (a paper table, or a count of the released files).
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Code link and licence
+      description: Write "none" if nothing is released.
+  - type: input
+    id: data
+    attributes:
+      label: Data link and licence
+      description: Write "none" if nothing is released.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I read contributing.md.
+          required: true
+        - label: I checked the venue on the venue's own site (or wrote "preprint").
+          required: true

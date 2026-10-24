@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this list, please cite it as below."
+type: dataset
+title: "Awesome EO Agent Benchmarks"
+abstract: "A curated, source-checked list of benchmarks that test Earth-observation (EO) agents: LLM-based systems that take several steps and call tools to solve tasks over Earth observation data."
+authors:
+  - family-names: Oikonomidis
+    given-names: Alexandros
+repository-code: "https://github.com/AlexEco1/awesome-eo-agent-benchmarks"
+url: "https://github.com/AlexEco1/awesome-eo-agent-benchmarks"
+license: CC0-1.0
+date-released: "2026-10-24"
+keywords:
+  - earth observation
+  - remote sensing
+  - geospatial
+  - LLM agents
+  - benchmarks
+  - evaluation
