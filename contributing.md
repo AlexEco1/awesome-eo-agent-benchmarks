@@ -47,12 +47,12 @@ Decided in our July 2026 review. If something has changed, please open a correct
 |---|---|---|
 | Gate 2: map records only | MapEval-API ([arXiv:2501.00316](https://arxiv.org/abs/2501.00316)) | The agent's tools look up places, routes and travel times; nothing about the Earth is measured. |
 | Gate 2: almost no observation data | GeoBenchX ([arXiv:2503.18129](https://arxiv.org/abs/2503.18129)) | 2 of its 11 rasters are observation-derived, used in about 1 of 200+ tasks; the rest is map and census data. |
-| Gate 2: vector records only | ShapefileGPT's task set | 42 shapefile-processing tasks; no observation-derived data. |
+| Gate 2: vector records only | ShapefileGPT's task set; GeoJSON Agents ([arXiv:2509.08863](https://arxiv.org/abs/2509.08863)) | Shapefile and GeoJSON processing tasks; no observation-derived data (GeoJSON Agents is also graded by hand). |
 | Gate 2: not geospatial | CORE | General-domain tool-use evaluation. |
 | Gate 1: one-shot code | AutoGEEval ([arXiv:2505.12900](https://arxiv.org/abs/2505.12900)) and its follow-ups; GeoCode-Bench / GeoCode-Eval (from GeoCode-GPT) | The model writes code once; it is run and scored. No loop. |
 | Gate 1: code never run | GeoGraphRAG's 300 Earth Engine workflows ([doi](https://doi.org/10.1016/j.jag.2025.104712)) | Generated code is graded by similarity, never executed. |
-| Gate 1: plans never executed | GTChain-Eval ([doi](https://doi.org/10.1016/j.jag.2024.104312)); GeoTool-GPT's prompt set | Workflows are written once as text; GeoTool-GPT's are carried out by people in ArcGIS. |
+| Gate 1: plans never executed | GTChain-Eval ([doi](https://doi.org/10.1016/j.jag.2024.104312)); GeoTool-GPT's prompt set; GeoPlan-bench ([arXiv:2511.17198](https://arxiv.org/abs/2511.17198)) | Workflows are written once as text and scored without running the tools; GeoTool-GPT's are carried out by people in ArcGIS. |
 | Gate 1: no tools | RS-VL3M ([arXiv:2507.20776](https://arxiv.org/abs/2507.20776)); MineBench; CityBench | A vision-language corpus; a VQA formulation; a simulator with no model-invoked tools. |
-| Gate 1: single-turn question answering | VRSBench ([arXiv:2406.12384](https://arxiv.org/abs/2406.12384)), GeoChat, GEOBench-VLM, LHRS-Bench, XLRS-Bench and similar | One image, one question, one answer. |
-| Not a benchmark | RS-Agent, GIS Copilot, GeoLLM-Squad, REMSA and other agent systems | These papers describe the system being tested, not a test. |
+| Gate 1: single-turn question answering | VRSBench ([arXiv:2406.12384](https://arxiv.org/abs/2406.12384)), AirSpatial-Bench ([arXiv:2601.01416](https://arxiv.org/abs/2601.01416)), GeoChat, GEOBench-VLM, LHRS-Bench, XLRS-Bench and similar | One image, one question, one answer. |
+| Not a benchmark | RS-Agent, GIS Copilot, GeoLLM-Squad, REMSA, RemoteAgent (its VagueEO set) and other agent systems | These papers describe the system being tested; VagueEO scores routing a query to an expert model, not a multi-step loop. |
 | Out of scope by type | AstroAgentBench, formerly AstroReason-Bench ([arXiv:2601.11354](https://arxiv.org/abs/2601.11354)); BEDI, ESARBench | Space-mission and satellite tasking (deciding what to photograph); embodied UAV robotics. |

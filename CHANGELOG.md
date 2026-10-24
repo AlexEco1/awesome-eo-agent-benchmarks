@@ -2,6 +2,14 @@
 
 Dated changes to the list. Every entry was checked against its primary sources on the date shown.
 
+## 2026-10-25
+
+A systematic search for new benchmarks (arXiv, 2026 venue lists, other lists, GitHub and Hugging Face), cross-checked with the ESA Φ-lab / BIFOLD survey of EO agent benchmarks.
+
+- **Added:** DUDA-Bench, KnowFlow-Bench and CBGB (†).
+- **Venue:** EarthVerse is a NeurIPS 2026 workshop paper.
+- **Excluded list extended** in `contributing.md`: GeoPlan-bench, GeoJSON Agents, AirSpatial-Bench, RemoteAgent's VagueEO.
+
 ## 2026-10-24
 
 Full re-check of every entry against its sources (paper, venue page, repository, dataset).
